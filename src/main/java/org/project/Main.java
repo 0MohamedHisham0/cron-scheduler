@@ -13,47 +13,22 @@ public class Main {
 
     public static void main(String[] args) {
         schedulerProcessor.startScan();
+    }
 
-        ZonedDateTime now = ZonedDateTime.now();
-        String job2Expr = now.getMinute() + " * * * *";
-
-        for (int i = 0; i < 3; i++) {
-            String uuid = UUID.randomUUID().toString();
-            Job job2 = new Job(
-                    getRunnableForTest(),
-                    job2Expr,
-                    uuid
-            );
-            CronScheduler.getInstance().schedule((job2));
+    @Scheduled(groupId = "groupId1", cronExpression = "16 * * * *")
+    public void runThread() {
+        for (int i = 1; i < 3; i++) {
+            try {
+                System.out.println();
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public static Runnable getRunnableForTest() {
-        return () -> {
-            for (int i = 1; i < 3; i++) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
+    @Scheduled(groupId = "groupId2", cronExpression = "4 * * * *")
+    public void myTask() {
+        System.out.println("TASK 1");
     }
-
-//    @Scheduled(groupId = "myGroup", cronExpression = "16 * * * *")
-//    public void runThread() {
-//        for (int i = 1; i < 3; i++) {
-//            try {
-//                System.out.println();
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//    }
-//
-//    @Scheduled(groupId = "myGroup", cronExpression = "4 * * * *")
-//    public void myTask() {
-//        System.out.println("TASK 1");
-//    }
 }
