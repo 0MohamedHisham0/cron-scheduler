@@ -48,8 +48,8 @@ Job job = new Job(() -> {
         throw new RuntimeException("Failed to update database", e);
     }
 },
-cronExpression,
-jobId
+    cronExpression,
+    jobId
 );
 cronScheduler.schedule(job);
 ```
