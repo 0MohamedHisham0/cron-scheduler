@@ -3,8 +3,9 @@
 This project is a Java-based scheduled task executor that allows you to schedule and run tasks using a cron expression. The tasks are managed in a priority queue and executed by a thread pool. This solution also includes logging using Log4j2 and unit tests to ensure functionality.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/45f602f9-80c2-4658-922e-ead760b48e79">
+  <img src="https://github.com/user-attachments/assets/233d1962-303b-49a8-a1ba-9115b1e823b0">
 </p>
+
 
 ## Features
 
@@ -14,6 +15,7 @@ This project is a Java-based scheduled task executor that allows you to schedule
 - **Thread Pool:** Tasks are executed using a thread pool with a configurable number of threads (default: 10). [For More](https://backendhance.com/en/blog/2023/optimal-thread-pool-size/)
 - **Logging:** Comprehensive logging using Log4j2.
 - **Annotations:** Use annotations to specify cron expressions and job IDs for your functions.
+- **JAR Integration:** Import this project as a JAR file into your existing Java projects for seamless integration of scheduling capabilities.
 
 ## Technical Decisions and Trade-offs
 
@@ -28,7 +30,7 @@ This project is a Java-based scheduled task executor that allows you to schedule
 You can use the @Scheduled annotation to execute a new job. *The function must be parameterless*.
 
 ```java
-@Scheduled(cronExpression = "0 0 0 * *", jobId = "yourJobId")
+@Scheduled(cronExpression = "0 * * * *", jobId = "yourJobId")
 public void updateDatabaseNightly() {
     try {
         performDatabaseUpdate();
@@ -37,12 +39,19 @@ public void updateDatabaseNightly() {
     }
 }
 ```
+### Another Example for @Scheduled annotation
+```java
+@Scheduled(cronExpression = "0 1 * * *", jobId = "yourJobId")
+public void webDataScraping() {
+    performWebScraping();
+}
+```
 ### Using the Schedule Function <br/>
 You can also use the schedule function as shown below:
 
 ```java
 String jobId = UUID.randomUUID().toString();
-String cronExpression = "0 0 0 * *";
+String cronExpression = "0 * * * *";
 Job job = new Job(() -> {
     try {
         performDatabaseUpdate();
