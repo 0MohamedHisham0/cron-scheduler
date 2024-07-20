@@ -26,15 +26,12 @@ This project is a Java-based scheduled task executor that allows you to schedule
 You can use the @Scheduled annotation to execute a new job. *The function must be parameterless*.
 
 ```java
-@Scheduled(groupId = "groupId1", cronExpression = "16 * * * *")
-public void runThread() {
-    for (int i = 1; i < 3; i++) {
-        try {
-            System.out.println();
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+@Scheduled(cronExpression = "0 0 0 * *", jobId = "yourJobId")
+public void updateDatabaseNightly() {
+    try {
+        performDatabaseUpdate();
+    } catch (SQLException e) {
+        throw new RuntimeException("Failed to update database", e);
     }
 }
 ```
@@ -43,12 +40,16 @@ You can also use the schedule function as shown below:
 
 ```java
 String jobId = UUID.randomUUID().toString();
-String cronExpression = "1 * * * *";
+String cronExpression = "0 0 0 * *";
 Job job = new Job(() -> {
-    // your code here
+    try {
+        performDatabaseUpdate();
+    } catch (SQLException e) {
+        throw new RuntimeException("Failed to update database", e);
+    }
 },
-        cronExpression,
-        jobId
+cronExpression,
+jobId
 );
 cronScheduler.schedule(job);
 ```
