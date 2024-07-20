@@ -41,11 +41,11 @@ public class SchedulerProcessor {
 
     public static Job getJob(Class<?> clazz, Method method) {
         Scheduled scheduled = method.getAnnotation(Scheduled.class);
-        String groupId = scheduled.groupId();
+        String jobId = scheduled.jobId();
         String cronExpression = scheduled.cronExpression();
 
         Job job = new Job();
-        job.setJobId(groupId);
+        job.setJobId(jobId);
         job.setCronExpression(cronExpression);
         job.setRunnable(() -> {
             try {

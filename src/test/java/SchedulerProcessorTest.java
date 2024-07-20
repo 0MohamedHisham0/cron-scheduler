@@ -28,7 +28,7 @@ public class SchedulerProcessorTest {
     }
 
     static class MockScheduledClass {
-        @Scheduled(groupId = mockedJobId, cronExpression = mockedCronExpression)
+        @Scheduled(jobId = mockedJobId, cronExpression = mockedCronExpression)
         public void scheduledMethod() {
 
         }
