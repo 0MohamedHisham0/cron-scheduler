@@ -53,7 +53,7 @@ public class CronSchedulerTest {
     @Test
     void testGetJobsToRun() {
         cronScheduler.schedule(job);
-        List<Job> jobsToRun = cronScheduler.getJobsToRun(now);
+        List<Job> jobsToRun = cronScheduler.getAvailableJobsForRunning(now);
         assertTrue(jobsToRun.contains(job), "Job should be ready to run");
     }
 

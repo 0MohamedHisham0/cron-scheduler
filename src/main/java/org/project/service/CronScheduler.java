@@ -13,7 +13,6 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -40,7 +39,7 @@ public class CronScheduler {
             while (true) {
                 try {
                     ZonedDateTime now = ZonedDateTime.now(zone);
-                    List<Job> jobsToRun = getJobsToRun(now);
+                    List<Job> jobsToRun = getAvailableJobsForRunning(now);
                     for (Job jobToRun : jobsToRun) {
                         executor.submit(() -> runJob(jobToRun));
                     }
@@ -58,7 +57,7 @@ public class CronScheduler {
         pollingThread.start();
     }
 
-    public List<Job> getJobsToRun(ZonedDateTime now) {
+    public List<Job> getAvailableJobsForRunning(ZonedDateTime now) {
         List<Job> jobsToRun = new ArrayList<>();
         ZonedDateTime nowTruncated = now.truncatedTo(ChronoUnit.MINUTES);
         Job job = tasksQueue.peek();
@@ -111,6 +110,7 @@ public class CronScheduler {
     public void schedule(Job job) {
         tasksQueue.add(job);
     }
+
     public PriorityBlockingQueue<Job> getQueue() {
         return tasksQueue;
     }
