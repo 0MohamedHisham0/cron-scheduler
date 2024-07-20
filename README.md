@@ -6,17 +6,15 @@ This project is a Java-based scheduled task executor that allows you to schedule
 
 ## Features
 
-Features
 - **Schedule Function:** Schedule your runnable function using a job ID and cron expression (UNIX format).
 - **Priority Queue:** Tasks are added to a priority queue that sorts them by the next execution time.
 - **Thread Management:** A dedicated thread checks and executes tasks when their scheduled time arrives, with a sleep interval of 30 seconds.
-- **Thread Pool:** Tasks are executed using a thread pool with a configurable number of threads (default: 10).
+- **Thread Pool:** Tasks are executed using a thread pool with a configurable number of threads (default: 10). [For More](https://backendhance.com/en/blog/2023/optimal-thread-pool-size/)
 - **Logging:** Comprehensive logging using Log4j2.
 - **Annotations:** Use annotations to specify cron expressions and job IDs for your functions.
 
 ## Technical Decisions and Trade-offs
 
-- **Priority Queue:** The initial capacity of the priority queue is set to 10 (PRIORITY_QUEUE_INITIAL_CAPACITY = 10) to handle a reasonable number of tasks. This can be adjusted as needed.
 - **Thread Sleep Interval:** The thread checks for tasks every 30 seconds. This trade-off balances availability and performance.
 - **Thread Pool:** The number of threads in the pool is set to 10 (NUMBER_OF_POOL_THREADS = 10) to manage concurrent task execution. This number can be configured based on system resources and requirements.
 - **Cron Expression and Execution Frequency:** Using Unix CronExp and running the thread every 1 minute balances the system load. Checking the queue every second would be too resource-intensive and it's rare to find tasks that need to run at an exact second.
