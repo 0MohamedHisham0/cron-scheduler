@@ -2,7 +2,7 @@
 
 This project is a Java-based scheduled task executor that allows you to schedule and run tasks using a cron expression. The tasks are managed in a priority queue and executed by a thread pool. This solution also includes logging using Log4j2 and unit tests to ensure functionality.
 
-![cron-scheduler drawio (2)](https://github.com/user-attachments/assets/8774ac02-79b5-4f38-b376-66d012f5eac9)
+![cron-scheduler drawio (3)](https://github.com/user-attachments/assets/45f602f9-80c2-4658-922e-ead760b48e79)
 
 ## Features
 
