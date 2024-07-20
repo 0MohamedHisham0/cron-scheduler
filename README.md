@@ -3,7 +3,7 @@
 This project is a Java-based scheduled task executor that allows you to schedule and run tasks using a cron expression. The tasks are managed in a priority queue and executed by a thread pool. This solution also includes logging using Log4j2 and unit tests to ensure functionality.
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/user-attachments/assets/45f602f9-80c2-4658-922e-ead760b48e79">
+  <img src="https://github.com/user-attachments/assets/45f602f9-80c2-4658-922e-ead760b48e79">
 </p>
 
 ## Features
