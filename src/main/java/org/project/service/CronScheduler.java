@@ -97,8 +97,6 @@ public class CronScheduler {
             MDC.clear();
         } finally {
             jobToRun.setLastRunDate(ZonedDateTime.now());
-            System.out.println(jobToRun);
-
             schedule(jobToRun);
         }
     }

@@ -11,7 +11,7 @@ public interface Constants {
     ZoneId zone = ZoneId.systemDefault();
     int NUMBER_OF_POOL_THREADS = 10;
     int PRIORITY_QUEUE_INITIAL_CAPACITY = 11;
-    int POLLING_THREAD_DELAY = 1000;
+    int POLLING_THREAD_DELAY = 30000;
     interface LOG_KEYS {
         String TIME_IN_MS = "timeInMs";
         String JOB_ID = "jobId";
